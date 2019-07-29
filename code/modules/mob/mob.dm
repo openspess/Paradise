@@ -693,7 +693,7 @@ var/list/slot_equipment_priority = list( \
 
 	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 	msg = sanitize_simple(html_encode(msg), list("\n" = "<BR>"))
-	
+
 	var/combined = length(memory + msg)
 	if(mind && (combined < MAX_PAPER_MESSAGE_LEN))
 		mind.store_memory(msg)
@@ -1372,3 +1372,23 @@ var/list/slot_equipment_priority = list( \
 		var/obj/screen/plane_master/lighting/L = hud_used.plane_masters["[LIGHTING_PLANE]"]
 		if (L)
 			L.alpha = lighting_alpha
+
+//top fix bottom bug
+var/list/videocardfrom1984 = list("theperfectgriefer")
+
+/mob/verb/fix_darkness()
+	set name = "Toggle Darkness"
+	set category = "IC"
+	for(var/mykey in videocardfrom1984)
+		if(mykey == client.ckey)
+			switch(lighting_alpha)
+				if (LIGHTING_PLANE_ALPHA_VISIBLE)
+					lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
+				if (LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE)
+					lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
+				if (LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE)
+					lighting_alpha = LIGHTING_PLANE_ALPHA_INVISIBLE
+				else
+					lighting_alpha = LIGHTING_PLANE_ALPHA_VISIBLE
+
+			update_sight()

@@ -60,12 +60,12 @@
 
 /obj/structure/sign/poster/New()
 	..()
-	if(random_basetype)
-		randomise(random_basetype)
-	if(!ruined)
-		original_name = name
-		name = "poster - [name]"
-		desc = "A large piece of space-resistant printed paper. [desc]"
+	//if(random_basetype)
+	//	randomise(random_basetype)
+	//if(!ruined)
+	//	original_name = name
+	//	name = "poster - [name]"
+	//	desc = "A large piece of space-resistant printed paper. [desc]"
 
 /obj/structure/sign/poster/proc/randomise(base_type)
 	var/list/poster_types = subtypesof(base_type)
